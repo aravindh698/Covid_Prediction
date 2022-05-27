@@ -10,3 +10,4 @@ pandas==1.0.4
 scipy==1.2.3
 scikit-learn==0.18
 matplotlib==1.4.3
+python==3.9.10
