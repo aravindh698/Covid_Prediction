@@ -12,10 +12,10 @@ model2=pickle.load(f)
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'super secret key'
  
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'covid'
+app.config['MYSQL_HOST'] = 'remotemysql.com'
+app.config['MYSQL_USER'] = '2g2oJGLqTr'
+app.config['MYSQL_PASSWORD'] = 'EUMUa2SBAD'
+app.config['MYSQL_DB'] = '2g2oJGLqTr'
  
 mysql = MySQL(app)
 @app.route('/form')
@@ -81,6 +81,16 @@ def predict():
     final_features = [np.array(int_features)]
     prediction = model2.predict(final_features)
     output = round(prediction[0], 2)
+    if request.method == 'POST':
+       contactwithcovidpatient = request.form['Contact_with_covid_patient']
+       Age = request.form['Age']
+       Bodypain = request.form['Bodypain']
+       Severity = request.form['Severity']
+       Difficultyinbreathing = request.form['Difficulty_in_breathing']
+       cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+       cursor.execute('INSERT INTO prediction VALUES (%s,%s,%s,%s,%s)',(contactwithcovidpatient,Age,Bodypain,Severity,Difficultyinbreathing))
+       mysql.connection.commit()
+       cursor.close()
     
     return render_template('index2.html', prediction_text='Chances of covid is {}'.format(output))
 
