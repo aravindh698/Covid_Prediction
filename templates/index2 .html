@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Covid Predictor</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+	body {
+  background-image : url('/static/covid.jpg')
+  }
+</style>
+</head>
+
+<body>
+ <div class="login">
+	<h1>Covid Predictor</h1>
+     <h3> Enter the following values to predict the Covid</h3>
+
+     <!-- Main Input For Receiving Query to our ML -->
+     <form action="{{ url_for('predict')}}"method="post">
+        <input type="text" name="Contact_with_covid_patient" placeholder="Contact_with_covid_patient" required />
+        <input type="text" name="Age" placeholder="Age- Enter your Age" required/>
+		<input type="text" name="Bodypain" placeholder="Bodypain-Enter 0/1" required/>
+        <input type="text" name="Severity" placeholder="Severity-Enter 0/1/2" required/>
+        <input type="text" name="Difficulty_in_breathing" placeholder="Difficulty_in_breathing" required/>
+        <input type="submit" value="Predict" />
+        <button type="submit" onclick="window.location.href='{{url_for('move_forward')}}';" class="btn">FeedBack</button>
+ </form>
+  {{ prediction_text }}
+ 
+</div>
+ </body>
+<marquee>"Enter values 0 if no else enter 1"</marquee>
+ 
+</html>
