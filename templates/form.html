@@ -1,0 +1,53 @@
+<html >
+<head>
+<style>
+	body {
+  background-image : url('/static/covid.jpg')
+  }
+  .container1
+  {
+   padding-top:12%
+   
+  }
+  .form{
+  height : 50%;
+  width : 20%;
+  padding-right:50px;
+  /*background-color : hsla(0, 100%, 50%, 0.3);
+  border-style : solid;
+  border-color : rose;
+  border-radius : 4px;*/
+  }
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='sstyle.css') }}">
+ 
+</style>
+</head>
+<body>
+<center>
+<div class="container1">
+<h1 style="color:orange">Signup/Register</h1>
+<br>
+<br>
+<div class="form">
+<center><font size="4">
+<form action="{{ url_for('form') }}" method = "POST" style="text-align: right; color:orange">
+   <div class="msg" style="text-align:center;"><h3 style="color:white">{{msg}}</h1></div><br><br>
+   Id : 
+   <input type = "text" name = "id" /><br><br> 
+   Username : 
+   <input type = "text" name = "username" /><br><br> 
+   Password : 
+   <input type = "text" name = "password" /><br><br> 
+   E-mail : 
+   <input type = "text" name = "email" /><br><br><br> 
+   <div style="padding-right:90px;"><input type = "submit" value = "SUBMIT"/></div>
+</form>
+</font>
+</center>
+</div>
+</div>
+</center>
+</body>
+</html>
+
