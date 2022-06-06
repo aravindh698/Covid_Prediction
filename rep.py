@@ -88,7 +88,7 @@ def predict():
        Severity = request.form['Severity']
        Difficultyinbreathing = request.form['Difficulty_in_breathing']
        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-       cursor.execute('INSERT INTO prediction VALUES (%s,%s,%s,%s,%s)',(contactwithcovidpatient,Age,Bodypain,Severity,Difficultyinbreathing))
+       cursor.execute('INSERT INTO Prediction2 VALUES (%s,%s,%s,%s,%s,%s)',(contactwithcovidpatient,Age,Bodypain,Severity,Difficultyinbreathing,session['id']))
        mysql.connection.commit()
        cursor.close()
     
