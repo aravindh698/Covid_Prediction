@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html >
-
 <head>
   <meta charset="UTF-8">
   <title>Covid Predictor</title>
@@ -9,7 +8,71 @@
 <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+	body {
+  background-image : url('/static/covid.jpg')
+  }
+   
+   select {
+  font: 400 12px/1.3 sans-serif;
+  -webkit-appearance: none;
+  appearance: none;
+  color: var(--baseFg);
+  border: 1px solid var(--baseFg);
+  line-height: 1;
+  outline: 0;
+  padding: 0.65em 2.5em 0.55em 0.75em;
+  border-radius: var(--radius);
+  background-color: var(--baseBg);
+  background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+  background-position: right 20px center, right bottom, right bottom, right bottom; 
+  width: 100%;
+	margin-bottom: 10px;
+	background: rgba(255,0,0,0.3);
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #fff;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+	border: 1px solid rgba(0,0,0,0.3);
+	border-radius: 4px;
+	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+	-webkit-transition: box-shadow .5s ease;
+	-moz-transition: box-shadow .5s ease;
+	-o-transition: box-shadow .5s ease;
+	-ms-transition: box-shadow .5s ease;
+	transition: box-shadow .5s ease;  
+}
 
+select:hover {
+  background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+}
+
+select:active {
+  background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+  color: var(--accentBg);
+  border-color: var(--accentFg);
+  background-color: var(--accentFg);
+}
+
+html {
+overflow-y: scroll;
+overflow-x: hidden;
+}
+   
+</style>
 </head>
 
 <body>
@@ -18,21 +81,41 @@
      <h3> Enter the following values to predict the Covid</h3>
 
      <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
-    	<input type="text" name="Contact_with_covid_patient" placeholder="Contact_with_covid_patient" required="required" />
-        <input type="text" name="Age" placeholder="Age" required="required" />
-		<input type="text" name="Bodypain" placeholder="Bodypain" required="required" />
-        <input type="text" name="Severity" placeholder="Severity" required="required" />
-        <input type="text" name="Difficulty_in_breathing" placeholder="Difficulty_in_breathing" required="required" />
-        <button type="submit" class="btn">Predict</button>
-    </form>
-
-   <br>
-   <br>
-   {{ prediction_text }}
-
- </div>
-
-
-</body>
+     <form action="{{ url_for('predict')}}"method="post">
+        <label for="Contact_with_covid_patient">Contact_with_covid_patient</label>
+        <select name="Contact_with_covid_patient">
+        <option value="1">Yes I'm in contact with covidpatient</option>
+        <option value="1">May be I'm in contact with covidpatient</option>
+        <option value="0">No I'm not in contact with any one</option>
+        </select> 
+        <label for="Age"> Age </label>
+        <input type="text" name="Age" placeholder="Age- Enter your Age" required/>
+	<label for="Bodypain">Body_Pain</label>
+        <select name="Bodypain">
+        <option value="1">Yes I'm having Body pain</option>
+        <option value="0">No I'm not having any body_pain</option>
+        </select> 
+        <label for="Severity">severity</label>
+        <select name="Severity">
+        <option value="1">Yes I'm having Medium severity</option>
+        <option value="2">Yes I have high severity</option>
+        <option value="0">No I'm not having any severity</option>
+        </select> 
+         <label for="Difficulty_in_breathing">Difficulty_in_Breathing</label>
+        <select name="Difficulty_in_breathing">
+        <option value="1">Yes I'm having Difficulty in Breathing</option>
+        <option value="0">No I'm not having any Breathing Issues </option>
+        </select> 
+        <label for="Runny_nose">Runny_nose</label>
+        <select name="Runny_nose">
+        <option value="1">Yes I'm have Runny_nose</option>
+        <option value="0">No I'm not having any Runny_nose</option>
+        </select>
+        <input type="submit" value="Predict" />
+        <button type="submit" onclick="window.location.href='{{url_for('move_forward')}}';" class="btn">FeedBack</button>
+ </form>
+  {{ prediction_text }}
+ 
+</div>
+ </body>
 </html>
